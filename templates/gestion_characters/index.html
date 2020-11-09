@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GestionCharactersController!{% endblock %}
+
+{% block body %}
+
+{% if characters|length %}
+<h1>Choissisez un personnage </h1>
+{% else %}
+<h1>Veuillez créer un personnage</h1>
+<a class ="btn" href ="/creation/characters">Création de personnage</a>
+{% endif %}
+
+
+<h1></h1>
+{% endblock %}

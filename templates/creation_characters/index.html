@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CreationCharactersController!{% endblock %}
+
+{% block body %}
+<h1>Bienvenue dans la création de personnage</h1>
+<label for="LNCharacters">Ici le nom de votre personnage</label>
+<input id="LNCharacters" type="text" name="LastNameCharacters" placeholder="Nom du personnage">
+<br>
+<label for="FNCharacters">Veuillez ensuite entré le prénom de votre personnage</label>
+<input type="text" name="FirstNameCharacters" id="FNCharacters" placeholder="Prénom du personnage">
+<br>
+<h6>Entré une description de votre personnage</h6>
+<textarea name="Description" id="Description" cols="100" rows="10"></textarea>
+
+{% endblock %}
