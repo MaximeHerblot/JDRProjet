@@ -14,8 +14,13 @@ class GestionCharactersController extends AbstractController
      */
     public function index(): Response
     {
-        //Récupération des personnages existants
-        $characters = $this->getDoctrine()->getRepository(Characters::class)->findAll();
+
+        // dd($this->getUser());
+
+        //Récupération des personnages de l'utilisateur
+
+        $characters = $this->getUser()->getCharacters();
+        
         
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,15 @@ class HomePageController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('home/home.html.twig');
+        
+        if ($this->getUser()==null) {
+            return $this->redirectToRoute('app_login');
+            // $this->redirect("/login");
+        } else {
+            
+            return $this->render('home/home.html.twig');
+        }
         
     }
+    
 }

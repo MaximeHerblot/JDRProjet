@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post" action="/incription/user/requete">
+    <label for="email">Email</label>
+    <input name="email" id="mail" type="email" required>
+    
+    <label for="password">password</label>
+    <input name="password" id="password" type="password" required>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

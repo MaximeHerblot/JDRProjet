@@ -4,13 +4,26 @@
 
 {% block body %}
 <h1>Bienvenue dans la création de personnage</h1>
-<label for="LNCharacters">Ici le nom de votre personnage</label>
-<input id="LNCharacters" type="text" name="LastNameCharacters" placeholder="Nom du personnage">
-<br>
-<label for="FNCharacters">Veuillez ensuite entré le prénom de votre personnage</label>
-<input type="text" name="FirstNameCharacters" id="FNCharacters" placeholder="Prénom du personnage">
-<br>
-<h6>Entré une description de votre personnage</h6>
-<textarea name="Description" id="Description" cols="100" rows="10"></textarea>
+<form action="/creation/characters/requete">
+    <label for="LNCharacters">Ici le nom de votre personnage</label>
+    <input required id="LNCharacters" type="text" name="LastNameCharacters" placeholder="Nom du personnage">
+    <br>
+    <label for="FNCharacters">Veuillez ensuite entré le prénom de votre personnage</label>
+    <input required type="text" name="FirstNameCharacters" id="FNCharacters" placeholder="Prénom du personnage">
+    <br>
+    <h6>Entré une description de votre personnage</h6>
+    <textarea required name="Description" id="Description" cols="100" rows="10"></textarea>
+    <br>
+    <select name="race" id="race">
+    {% for Race in RepoRace %}
+        <option value={{Race.Name}}>{{Race.Name}}</option>
+        <!-- Création de la liste déroulante -->
+        
+        <!---->
+    {% endfor %}
+    </select>
+    <input id="userId" name="userId" type="hidden" value="{{app.user.id}}">
+    <button class="btn">Création du personnage</button>
+</form>
 
 {% endblock %}

@@ -47,6 +47,11 @@ class Characters
      */
     private $race;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="characters")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +125,18 @@ class Characters
     public function setRace(?Race $race): self
     {
         $this->race = $race;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
