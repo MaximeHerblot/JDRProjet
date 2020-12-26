@@ -18,6 +18,8 @@ class CreationCharactersController extends AbstractController
     public function index(): Response
     {
 
+
+
         $em = $this->getDoctrine()->getManager();
         //Récupération des personnages de l'utilisateur
         

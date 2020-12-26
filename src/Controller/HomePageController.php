@@ -15,14 +15,14 @@ class HomePageController extends AbstractController
     public function index(): Response
     {
         
-        if ($this->getUser()==null) {
-            return $this->redirectToRoute('app_login');
-            // $this->redirect("/login");
-        } else {
+        // if ($this->getUser()==null) {
+        //     return $this->redirectToRoute('app_login');
+        //     // $this->redirect("/login");
+        // } else {
             
-            return $this->render('home/home.html.twig');
-        }
-        
+            
+        // }
+        return $this->render('home/home.html.twig');
     }
     
 }

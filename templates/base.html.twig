@@ -3,15 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/6236914045.js"></script>
 
+        {% block stylesheets %}
+            <style>
+            main {
+                margin-top:1rem;
+                margin-left:1rem;
+            }
+            
+            .navbar{
+                background-color:#e5e3e4;
+            }
+
+            ul{
+                text-align:center;
+            }
+            </style>
+        {% endblock %}
     </head>
     <body>
-        {% block body %}
-        <p>This is the starts</p>
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
+    
+        <nav class="navbar ">
+            <ul class="col-6">
+                <a href="/" class="nav-link ">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                Page d'acceuil
+                </a>
+            </ul>
+            <ul class="col-6">
+                <a href="/gestion/characters">Gestion Personnage</a>
+            </ul>
+            
+        </nav>
+        <main>
+            {% block body %}
+                <p>There is no body block on your page<p>
+            {% endblock %}
+            {% block javascripts %}{% endblock %}
+        </main>
     </body>
 </html>
