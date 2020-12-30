@@ -36,5 +36,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: /gestion, roles: ROLE_ADMIN}
+        - { path: /gestion, roles: IS_AUTHENTICATED_FULLY}
         - { path: /creation, roles: IS_AUTHENTICATED_FULLY}
+

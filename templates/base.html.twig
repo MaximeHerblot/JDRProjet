@@ -6,38 +6,61 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://use.fontawesome.com/6236914045.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-        {% block stylesheets %}
-            <style>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
             main {
                 margin-top:1rem;
                 margin-left:1rem;
             }
             
-            .navbar{
+            #navbar{
                 background-color:#e5e3e4;
+                padding:0.5rem;
             }
 
             ul{
                 text-align:center;
             }
-            </style>
+        
+        {% block stylesheets %}
+            
         {% endblock %}
+        </style>
     </head>
     <body>
-    
-        <nav class="navbar ">
-            <ul class="col-6">
+    <div id="navbar" class="row">
+        <nav class="navbar col-10 ">
+            <ul class="col-3">
                 <a href="/" class="nav-link ">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 Page d'acceuil
                 </a>
             </ul>
-            <ul class="col-6">
+            <ul class="col-3">
                 <a href="/gestion/characters">Gestion Personnage</a>
+            </ul>
+            <ul class="col-6">
             </ul>
             
         </nav>
+        <div class="col-2" style="margin-top:0.5rem">
+        {% if app.user %}
+
+            <a href="/logout">
+        {% else %}
+            <a href="/login">
+        {% endif %}
+
+            <i class="fa fa-user-circle fa-3x"></i>
+            </a>
+
+            
+            <a style="margin-bottom:0.25rem">{{app.user?app.user.getEmail() : 'Not logged'}} </a>
+            
+        </div>
+    </div>
         <main>
             {% block body %}
                 <p>There is no body block on your page<p>

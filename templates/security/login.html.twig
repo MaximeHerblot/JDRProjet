@@ -1,9 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+.div {
+    padding-left:35%;
+    padding-right:35%;
+    padding-top:8%;
+    {#
+    border-style:solid;
+    border-color:#dadce0; #}
+}
+.div2 {
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:2%;
+    padding-bottom:2%;
+   
+    border-style:solid;
+    border-color:#dadce0;
+    border-radius: 25px;
 
+}
+
+{% endblock %}
 {% block body %}
+<div class="div">
+<div class="div2">
 <form method="post">
+    
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -13,15 +37,17 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
+    <div class="input">
+    <h1 class="h3 mb-3 font-weight-normal">Connexion au site</h1>
+    <label for="inputEmail">Entre ton email</label>
+    <input placeholder ="Adresse e-mail" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+    </div>
+    <div class="input">
+    <label for="inputPassword">Et ici ton mot de passe</label>
+    <input placeholder ="Mot de passe" type="password" name="password" id="inputPassword" class="form-control" required>
+    </div>
     <input type="" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
+           value="{{ csrf_token('authenticate') }}" hidden
     >
 
     
@@ -34,9 +60,14 @@
             </label>
         </div>
     
-
+    
+    <a href="/incription/user" style="padding-bottom:10px">Vous n'avez pas de compte?</a>
+    </br>
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
+    
 </form>
+</div>
+</div>
 {% endblock %}

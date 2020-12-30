@@ -3,14 +3,28 @@
 
 {% block title %}Log in!{% endblock %}
 
+{% block stylesheets %}
+.inscription{
+    width:33%;
+}
+input{
+    margin-bottom:10px;
+}
+.passwordPattern{
+    font-size:0.8em;
+}
+{% endblock %}
 {% block body %}
+<div class="inscription">
+<h3>Bienvenue dans la création de compte</h3>
 <form method="post" action="/incription/user/requete">
-    <label for="email">Email</label>
-    <input name="email" id="mail" type="email" required>
-    
-    <label for="password">password</label>
-    <input name="password" id="password" type="password" required>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input name="email" id="mail" type="email" placeholder="Email" required>
+    </br>
+    <input name="password" id="password" type="password" placeholder="Password" required>
+    <p class="passwordPattern">Veuillez utilisé au moins 8 characters, une majuscule, une minuscule, et un character spécial </p>
+    </br>
+    <button type="submit" class="btn btn-primary btn-block">Inscription</button>
     
 </form>
+</div>
 {% endblock %}
