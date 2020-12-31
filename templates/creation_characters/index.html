@@ -1,29 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello CreationCharactersController!{% endblock %}
+{% block stylesheets %}
+#race{
+    margin-bottom:10px;
+}
+{% endblock %}
+{% block javascripts %}
 
+function qs(id){
+    
+    return document.querySelector(id);
+}
+
+$("button")[0].onclick = function() {
+    console.log("KEKW")
+    
+    firstname = qs("#FNCharacters").value;
+    lastname = qs("#LNCharacters").value;
+    age = qs("#age").value;
+       
+    Description = qs("#Description").value;
+        
+    userId = qs('#userId').value;
+    raceId = qs("#race").value;
+    $.ajax({
+        url:"/creation/characters/requete",
+        type:"POST",
+        data:{firstname:firstname,lastname:lastname,age:age,Description:Description,userId:userId,raceId:raceId},
+    }).done(()=>{
+        console.log("Form submit")
+    })
+
+
+
+}
+
+{% endblock %}
 {% block body %}
 <h1>Bienvenue dans la création de personnage</h1>
-<form action="/creation/characters/requete">
+<div id="form" action="/creation/characters/requete">
     <label for="LNCharacters">Ici le nom de votre personnage</label>
     <input required id="LNCharacters" type="text" name="LastNameCharacters" placeholder="Nom du personnage">
     <br>
     <label for="FNCharacters">Veuillez ensuite entré le prénom de votre personnage</label>
     <input required type="text" name="FirstNameCharacters" id="FNCharacters" placeholder="Prénom du personnage">
     <br>
+    <label for="age">Qu'elle age a ton personnage?</label>
+    <input required type="number" name="age" id="age" placeholder="Âge" min="0" max="1000">
+    <br>
     <h6>Entré une description de votre personnage</h6>
     <textarea required name="Description" id="Description" cols="100" rows="10"></textarea>
     <br>
     <select name="race" id="race">
     {% for Race in RepoRace %}
-        <option value={{Race.Name}}>{{Race.Name}}</option>
+        <option value={{Race.id}}>{{Race.Name}}</option>
         <!-- Création de la liste déroulante -->
         
         <!---->
     {% endfor %}
     </select>
+    </br>
     <input id="userId" name="userId" type="hidden" value="{{app.user.id}}">
-    <button class="btn">Création du personnage</button>
-</form>
+    <button id="formSubmit" class="btn">Création du personnage</button>
+</div>
 
 {% endblock %}

@@ -43,7 +43,13 @@ class CreationCharactersController extends AbstractController
         $firstname = $_POST["firstname"];
         $age = $_POST["age"];
         $description = $_POST["Description"];
-        $id = $_POST["userId"]["id"];
+        if (isset($_POST["userId"])){
+            $userId = $_POST["userId"];
+        }
+        
+        if (isset($_POST["raceId"])){
+            $raceid = $_POST["raceId"];
+        } 
         //Insert d'un personnage dans la base
         
         $Characters = new Characters();
@@ -53,12 +59,12 @@ class CreationCharactersController extends AbstractController
         $Characters->setDescription($description);
 
         // $id = $this->getUser()->getId();
-        $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id)
-        VALUES ('$lastname','$firstname','$age','$description','$id')";
+        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id)
+        VALUES ('$lastname','$firstname','$age','$description','$userId','$raceid')";
         $conn->exec($sql);
-        return (object) array("lastname"=>$lastname,"firstname"=>$firstname,"age"=>$age,"description"=>$description,"id"=>$id);
+        return new Response ("",200,array("lastname"=>$lastname,"firstname"=>$firstname,"age"=>$age,"description"=>$description,"userId"=>$userId));
     }
 }

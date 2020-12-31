@@ -34,12 +34,13 @@ class RaceDataTest extends TestCase {
         }
 
         //Parcours les infos de la base de données pour voir si le nom de la race existait déja
-        $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt =$conn->prepare("SELECT name FROM race");
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_COLUMN,0);
+
         $list_fetch_race = $stmt->fetchAll();
         $race_dans_la_bd = FALSE;
         
@@ -52,7 +53,7 @@ class RaceDataTest extends TestCase {
 
         //Sois la race est dans la bd sois dans la classe
         $apparition_dans_une_seul_liste = ($race_dans_la_list xor $race_dans_la_bd);
-        // dd($apparition);
+        // dd($apparition_dans_une_seul_liste);
         // dd($race_dans_la_bd,$race_dans_la_list);
         assertEquals(TRUE,$apparition_dans_une_seul_liste);
     }

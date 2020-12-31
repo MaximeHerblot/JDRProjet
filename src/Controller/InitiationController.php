@@ -22,7 +22,7 @@ class InitiationController extends AbstractController
         //Ajout de toutes les races qui sont nécessaires dans une liste
         $listRace = [];
 
-        array_push($listRace,"Humai");
+        array_push($listRace,"Humain");
         array_push($listRace,"Elfe");
         array_push($listRace,"Nain");
 
@@ -34,7 +34,7 @@ class InitiationController extends AbstractController
         }
 
         //Ajout dans la base de données des différents races
-        $raceData->pushListRace($this->getDoctrine()->getManager());
+        ($raceData->pushListRace($this->getDoctrine()->getManager()));
         
 
         return $this->render('initiation/index.html.twig', [

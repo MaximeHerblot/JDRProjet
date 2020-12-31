@@ -35,7 +35,7 @@ class RaceData {
 
         //Vérification dans la base de données
         
-        $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt =$conn->prepare("SELECT name FROM race");

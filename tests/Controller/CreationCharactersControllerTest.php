@@ -24,7 +24,7 @@ class CreationCharactersControllerTest extends TestCase{
         $description = $_POST["Description"] = $faker->text(50);
         $age = $_POST["age"] = rand(15,300);
 
-        $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt= $conn->prepare("SELECT id FROM user");
@@ -33,30 +33,47 @@ class CreationCharactersControllerTest extends TestCase{
 
         $fetch = $stmt->fetchAll();
         
-        $id = $_POST["userId"]=($fetch[rand(0,count($fetch)-1)]);
-        //Action qui va se passé 
+        $userId = $_POST["userId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        $stmt= $conn->prepare("SELECT id FROM race");
+        $stmt ->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Race');
+
+        $fetch = $stmt->fetchAll();
         
+        $raceId = $_POST["raceId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        
+        // dd($raceid,$userId);
+        //Action qui va se passé 
         //Un personnage a un prenom un nom un age une description
 
         //Création de différentes entité avec faker
         
         $controller = new CreationCharactersController();
         $infoCreation = $controller->creationPersonnage();
+
         
         
         //Alors on vérifie que les données qui sont enregistré sont les bonnes
        
-        $id = $id["id"];
-        $stmt =$conn->prepare("SELECT * FROM characters WHERE lastname LIKE '$lastname' AND firstname LIKE '$firstname' AND age LIKE '$age' AND user_id LIKE '$id'");
+        $stmt =$conn->prepare("SELECT * FROM characters WHERE lastname LIKE '$lastname' AND firstname LIKE '$firstname' AND age LIKE '$age' AND user_id LIKE '$userId' AND race_id LIKE '$raceId'");
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_CLASS,"Characters",[]);
-        $fetch = $stmt->fetchAll();
-        assertEquals($lastname,$infoCreation->{"lastname"});
-        assertEquals($firstname,$infoCreation->{"firstname"});
-        assertEquals($age,$infoCreation->{"age"});
-        assertEquals($description,$infoCreation->{"description"});
+        $fetch = $stmt->fetchAll()[0];
+        
+        assertEquals($lastname,$fetch["lastname"]);
+        assertEquals($firstname,$fetch["firstname"]);
+        assertEquals($age,$fetch["age"]);
+        assertEquals($description,$fetch["description"]);
         //Vérification que l'utilisateur a bien le personnage
-        assertEquals($id,$infoCreation->{"id"});
+        assertEquals($userId,$fetch["user_id"]);
+        assertEquals($raceId,$fetch["race_id"]);
+
+        // assertEquals($lastname,$infoCreation->{"lastname"});
+        // assertEquals($firstname,$infoCreation->{"firstname"});
+        // assertEquals($age,$infoCreation->{"age"});
+        // assertEquals($description,$infoCreation->{"description"});
+        // //Vérification que l'utilisateur a bien le personnage
+        // assertEquals($userId,$infoCreation->{"id"});
     }
 }
