@@ -3,6 +3,7 @@
 use App\Controller\CreationCharactersController;
 use App\Controller\HomePageController;
 use App\Entity\Characters;
+use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,15 +34,23 @@ class CreationCharactersControllerTest extends TestCase{
 
         $fetch = $stmt->fetchAll();
         
-        $userId = $_POST["userId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        if (!$fetch) {
+            $userId =NULL;
+        } else {
+            $userId = $_POST["userId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        }
+
         $stmt= $conn->prepare("SELECT id FROM race");
         $stmt ->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS,'Race');
 
         $fetch = $stmt->fetchAll();
         
-        $raceId = $_POST["raceId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
-        
+        if (!$fetch) {
+            $raceId =NULL;
+        } else {
+            $raceId = $_POST["raceId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        }
         // dd($raceid,$userId);
         //Action qui va se passé 
         //Un personnage a un prenom un nom un age une description
@@ -60,7 +69,6 @@ class CreationCharactersControllerTest extends TestCase{
 
         $stmt->setFetchMode(PDO::FETCH_CLASS,"Characters",[]);
         $fetch = $stmt->fetchAll()[0];
-        
         assertEquals($lastname,$fetch["lastname"]);
         assertEquals($firstname,$fetch["firstname"]);
         assertEquals($age,$fetch["age"]);
