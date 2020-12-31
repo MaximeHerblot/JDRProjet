@@ -10,4 +10,4 @@ Setup
 1) Composer install
 2) php bin/console doctrine:database:create
 3) php bin/console doctrine:migrations:migrate
-4)./vendor/bin/phpunit tests
+4) ./vendor/bin/phpunit tests
