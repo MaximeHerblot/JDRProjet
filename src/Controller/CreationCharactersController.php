@@ -57,7 +57,7 @@ class CreationCharactersController extends AbstractController
         $Characters->setFirstname($firstname);
         $Characters->setAge($age);
         $Characters->setDescription($description);
-
+        
         // $id = $this->getUser()->getId();
         $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
