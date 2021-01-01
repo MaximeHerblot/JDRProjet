@@ -2,10 +2,27 @@
 
 {% block title %}Hello GestionCharactersController!{% endblock %}
 
+{% block stylesheets %}
+#ChoixPersonnage {
+    width:60%;
+    border-color:grey;
+    border: solid;
+    padding-top:1em;
+    padding-bottom:1em;
+    padding-left:1em;
+}
+{% endblock %}
 {% block body %}
 
 {% if characters|length %}
 <h1>Choissisez un personnage </h1>
+<div id="ChoixPersonnage" class="">
+
+{% for character in characters %}
+<p>{{character.getFullName()}}</p>
+
+{% endfor %}
+</div>
 {% else %}
 <h1>Veuillez créer un personnage</h1>
 <a class ="btn" href ="/creation/characters">Création de personnage</a>
