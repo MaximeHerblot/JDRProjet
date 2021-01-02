@@ -24,7 +24,7 @@ class CreationCharactersControllerTest extends TestCase{
         $firstname = $_POST["firstname"] = explode(" ",$FirstNameLastName)[0];
         $description = $_POST["Description"] = $faker->text(50);
         $age = $_POST["age"] = rand(15,300);
-
+        
         $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
