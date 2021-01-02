@@ -26,27 +26,35 @@ $nameDB = substr($infoDBNonFiltre,0,strpos($infoDBNonFiltre,":"));
 //Execution de différents filtreurs pour pouvoir avoir les  autres informations nécessaires
 
 if (strtoupper($nameDB)=="SQLITE") {
-    filtreSQLite();
+    filtreSQLite($infoDBNonFiltre);
 } else if (strtoupper($nameDB)=="POSTGRESQL") {
-    filtrePostgreSQL();
+    filtrePostgreSQL($infoDBNonFiltre);
 } else if (strtoupper($nameDB)=="MYSQL") {
-    filtreMySql();
+    filtreMySql($infoDBNonFiltre);
 }
 
 
-function filtreSQLite(){
+function filtreSQLite($infoDBNonFiltre){
 
 }
 
-function filtrePostgreSQL(){
+function filtrePostgreSQL($infoDBNonFiltre){
 
 }
-
-function filtreMySql(){
+// echo $infoDBNonFiltre;
+function filtreMySql($infoDBNonFiltre){
+    
     //Récupération de l'identifiant
     //Récupération du mot de passe
+    $log = substr($infoDBNonFiltre,8,strpos($infoDBNonFiltre,"@")-8);
+    $identifiant = substr($log,0,strpos($log,":"));
+    $password = substr($log,strpos($log,":")+1);
+    
     //Récupération de l'host
+    $hostPortName= substr($infoDBNonFiltre,strpos($infoDBNonFiltre,"@")+1);
+    $host = substr($hostPortName,0,strpos($hostPortName,":"));
     //Récupération de la dbname
+    $dbname = substr($hostPortName,strpos($hostPortName,"/")+1);
 }
 
 
