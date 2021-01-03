@@ -20,7 +20,7 @@ class GestionCharactersController extends AbstractController
         //Récupération des personnages de l'utilisateur
 
         $characters = $this->getUser()->getCharacters();
-        
+        (($characters));
         
 
 
