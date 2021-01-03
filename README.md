@@ -9,7 +9,7 @@ Prerequirements
 
 Pre-setup
 
-Change the .env *database_url* variable to setup it right (MySql)
+Change the .env *database_url* variable to setup it right (MySql) \n
 Start your database 
 
 Setup
