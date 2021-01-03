@@ -20,6 +20,7 @@ Setup
 3) php bin/console doctrine:migrations:migrate
 4) symfony serve
 5) curl https://localhost:8000/initiation
+
 *Here is for running the test 
 
 6) vendor/bin/phpunit tests
