@@ -2,15 +2,13 @@
 
 namespace App\Service;
 use PDO;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ConnectionBdClass{
 
-    private $connection;
-    private $envFile;
-
     public function __construct()
     {
-        
+
     }
 
 
@@ -22,14 +20,10 @@ class ConnectionBdClass{
         //Formatage de l'information
         $donnee= $this->formatageInformation($infoDBNonFiltre,$dbType);
 
-        $dsn=$donnee["namedb"].":"."host=".$donnee["host"].$donnee["port"].";dbname=".$donnee["dbname"];
-        return new PDO($dsn,$donnee["id"],$donnee["password"]);
+        
+        return new PDO($donnee["namedb"].":"."host=".$donnee["host"].$donnee["port"].";dbname=".$donnee["dbname"],$donnee["id"],$donnee["password"]);
         //Ouverture de la connection
         
-    }
-
-    public function setEnvFile(string $locationEnvFile){
-        $this->envFile = file($locationEnvFile);
     }
 
     public function getInformation(){

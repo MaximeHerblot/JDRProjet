@@ -1,6 +1,7 @@
 <?php
 
 use App\DataBinder\RaceData;
+use App\Service\ConnectionBdClass;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -34,7 +35,8 @@ class RaceDataTest extends TestCase {
         }
 
         //Parcours les infos de la base de données pour voir si le nom de la race existait déja
-        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
+        $classConn = new ConnectionBdClass();
+        $conn = $classConn->getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt =$conn->prepare("SELECT name FROM race");

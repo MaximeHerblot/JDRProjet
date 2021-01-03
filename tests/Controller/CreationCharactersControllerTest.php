@@ -22,9 +22,10 @@ class CreationCharactersControllerTest extends TestCase{
         $description = $_POST["Description"] = $faker->text(50);
         $age = $_POST["age"] = rand(15,300);
 
-        $classCon = new ConnectionBdClass();
-        $classCon->setEnvFile("C:\Users\Gaken\Downloads\DND\.env");
-        $conn = $classCon->getConnection();
+
+        $classConn = new ConnectionBdClass();
+        $conn = $classConn->getConnection();
+
 
 
         // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
@@ -41,7 +42,6 @@ class CreationCharactersControllerTest extends TestCase{
         } else {
             $userId = $_POST["userId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
         }
-
         $stmt= $conn->prepare("SELECT id FROM race");
         $stmt ->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS,'Race');
