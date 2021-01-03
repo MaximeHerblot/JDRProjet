@@ -1,13 +1,10 @@
 <?php
 
+use App\Service\ConnectionBdClass;
 use App\Controller\CreationCharactersController;
-use App\Controller\HomePageController;
-use App\Entity\Characters;
-use phpDocumentor\Reflection\Types\Null_;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use function PHPUnit\Framework\assertEquals;
+
 
 class CreationCharactersControllerTest extends TestCase{
 
@@ -24,8 +21,13 @@ class CreationCharactersControllerTest extends TestCase{
         $firstname = $_POST["firstname"] = explode(" ",$FirstNameLastName)[0];
         $description = $_POST["Description"] = $faker->text(50);
         $age = $_POST["age"] = rand(15,300);
-        
-        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
+
+        $classCon = new ConnectionBdClass();
+        $classCon->setEnvFile("C:\Users\Gaken\Downloads\DND\.env");
+        $conn = $classCon->getConnection();
+
+
+        // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $stmt= $conn->prepare("SELECT id FROM user");

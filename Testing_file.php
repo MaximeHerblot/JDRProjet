@@ -18,19 +18,21 @@ foreach ($file2 as $lineFile){
     $i++;
 }
 //Récupération des données dans le .env de la database
-$infoDBNonFiltre = substr($file2[$indiceLine],$length);
 
+$infoDBNonFiltre = substr($file2[$indiceLine],$length);
+$infoDBNonFiltre = substr($infoDBNonFiltre,0,strlen($infoDBNonFiltre)-1);
+var_dump($infoDBNonFiltre);
 //Récupération du type de base de donnée
 $nameDB = substr($infoDBNonFiltre,0,strpos($infoDBNonFiltre,":"));
 
 //Execution de différents filtreurs pour pouvoir avoir les  autres informations nécessaires
 
 if (strtoupper($nameDB)=="SQLITE") {
-    filtreSQLite($infoDBNonFiltre);
+    $donnee = filtreSQLite($infoDBNonFiltre);
 } else if (strtoupper($nameDB)=="POSTGRESQL") {
-    filtrePostgreSQL($infoDBNonFiltre);
+    $donnee = filtrePostgreSQL($infoDBNonFiltre);
 } else if (strtoupper($nameDB)=="MYSQL") {
-    filtreMySql($infoDBNonFiltre);
+    $donnee = filtreMySql($infoDBNonFiltre);
 }
 
 
@@ -55,27 +57,12 @@ function filtreMySql($infoDBNonFiltre){
     $host = substr($hostPortName,0,strpos($hostPortName,":"));
     //Récupération de la dbname
     $dbname = substr($hostPortName,strpos($hostPortName,"/")+1);
+    $dbname = substr($dbname,0,strlen($dbname)-1);
+    $port = substr($hostPortName,strpos($hostPortName,":"),5);
+    return ["namedb"=>"mysql","id"=>$identifiant,"password"=>$password,"host"=>$host,"dbname"=>$dbname,"port"=>$port];
 }
+$dsn=$donnee["namedb"].":"."host=".$donnee["host"].$donnee["port"].";dbname=".$donnee["dbname"];
+
+$conn = new PDO($dsn,$donnee["id"],$donnee["password"]);
 
 
-
-
-
-//Récupération des données pour pouvoir récupérer les infos pour la bases de données
-
-
-// //Ouverture du fichier
-// $file = fopen(".env", "r+");
-// $filestr = fread($file,filesize(".env"));
-
-// //Récupération des données pour pouvoir récupérer les infos pour la bases de données
-// $debut="DATABASE_URL=";
-// $fin = "#";
-// $pos = strpos($filestr,$debut)+strlen($debut);
-// $posfin = strpos($filestr,"#",$pos);
-
-// $length = strlen("DATABASE_URL");
-
-// echo substr($filestr,$pos+$length+1,$posfin-$pos-$length-1);
-
-// echo substr($filestr,$pos+$length+1,$posfin-$pos-$length-1);
