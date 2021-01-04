@@ -29,4 +29,28 @@ class GestionCharactersController extends AbstractController
             'characters' => $characters
         ]);
     }
+
+    /**
+     * @Route("/gestion/characters/{id}")
+     */
+    public function pageEdition(int $id):Response
+    {
+        //Récupération de tout les personnages 
+        //Si le personnage qui correspond a cette id appartient a l'user alors on lui donne acces 
+        $characters= $this->getDoctrine()
+           ->getRepository(Characters::class)
+           ->find($id);
+        $this->getUser();
+        if ($this->getUser() == $characters->getUser()) {
+            return $this->render('gestion_characters/pageEdition.html', [
+                'controller_name' => 'GestionPersonnageController',
+                'characters' => $characters
+            ]);
+        } else {
+            return new Response("Vous ne posseder pas le personnage");
+        }
+        
+
+        
+    }
 }
