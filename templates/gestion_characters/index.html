@@ -20,7 +20,7 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns:  33% 33% 33%;
 }
 #nomPerso{
     text-align: center;
@@ -31,12 +31,12 @@
 
 }
 
-#buttonPersonnage{
+#buttonPersonnageShow{
     text-align: center;
     border-bottom:0px;
 }
 
-#edition{
+#show{
     margin-right: 10px;
     background-color:#3a3a3d;
     color:#efeff1;
@@ -60,8 +60,11 @@
     <div class="grid-item" id="nomPerso">
         <a id="name">{{character.getFullName()}} </a>
     </div>
-    <div class="grid-item"id="buttonPersonnage">
-        <a id="edition" href={{"/gestion/characters/"~character.getId()}}>Edition</a>
+    <div class="grid-item"id="buttonPersonnageShow">
+        <a id="show" href={{"/gestion/characters/"~character.getId()}}>Show</a>
+    </div>
+    <div class="grid-item"id="buttonPersonnageChoose">
+        <a id="choose" href={{"/gestion/characters/"~character.getId()}}>Choose</a>
     </div>
 </div>
 {% endfor %}
