@@ -5,12 +5,49 @@
 {% block stylesheets %}
 #ChoixPersonnage {
     width:60%;
-    border-color:grey;
-    border: solid;
     padding-top:1em;
     padding-bottom:1em;
     padding-left:1em;
 }
+#slotPersonnage{ 
+    min-width:200px;
+    max-width:30%;
+    text-align:justify;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#nomPerso{
+    text-align: center;
+    
+    border-bottom:solid;
+    border-color:grey;
+    border-width:1px;
+
+}
+
+#buttonPersonnage{
+    text-align: center;
+    border-bottom:0px;
+}
+
+#edition{
+    margin-right: 10px;
+    background-color:#3a3a3d;
+    color:#efeff1;
+    padding:2px;
+    border-radius: 5px;
+}
+
+#name{
+    font-family: fantasy;
+}
+
 {% endblock %}
 {% block body %}
 
@@ -19,15 +56,21 @@
 <div id="ChoixPersonnage" class="">
 
 {% for character in characters %}
-<p>{{character.getFullName()}}</p>
-
+<div class="grid-container" id="slotPersonnage">
+    <div class="grid-item" id="nomPerso">
+        <a id="name">{{character.getFullName()}} </a>
+    </div>
+    <div class="grid-item"id="buttonPersonnage">
+        <a id="edition" href={{"/gestion/characters/"~character.getId()}}>Edition</a>
+    </div>
+</div>
 {% endfor %}
 </div>
 {% else %}
 <h1>Veuillez créer un personnage</h1>
-<a class ="btn" href ="/creation/characters">Création de personnage</a>
 {% endif %}
-
+<h3>Veux-tu créer un personnage</h3>
+<a class ="btn" href ="/creation/characters">Création de personnage</a>
 
 <h1></h1>
 {% endblock %}

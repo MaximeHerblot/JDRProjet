@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<h1>{{characters.Lastname ~ characters.Firstname}}</h1>
+<h1>{{characters.getFullName()}}</h1>
 {% endblock %}

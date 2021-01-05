@@ -44,9 +44,10 @@ $("button")[0].onclick = function() {
         url:"/creation/characters/requete",
         type:"POST",
         data:list,
-    }).done(()=>{
-        console.log("Form submit")
-
+    }).done((e)=>{
+        $("#form").hidden()
+        $("#resultat").show()
+        console.log(e.lastname)
     })
 
 
@@ -80,6 +81,11 @@ $("button")[0].onclick = function() {
     </br>
     <input id="userId" name="userIdData" type="hidden" value="{{app.user.id}}">
     <button id="formSubmit" class="btn">Création du personnage</button>
+</div>
+
+<div id="resultat" hidden>
+    <h1>Voici le récapitulatif de la création de personnage</h1>
+
 </div>
 
 {% endblock %}

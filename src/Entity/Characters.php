@@ -55,7 +55,7 @@ class Characters
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $level;
+    private $experience;
 
     public function getId(): ?int
     {
@@ -148,17 +148,17 @@ class Characters
 
     public function getFullName():string 
     {
-        return $this->Firstname." ".$this->Lastname;
+        return $this->Lastname." ".$this->Firstname;
     }
 
-    public function getLevel(): ?int
+    public function getExperience(): ?int
     {
-        return $this->level;
+        return $this->experience;
     }
 
-    public function setLevel(?int $level): self
+    public function setExperience(?int $experience): self
     {
-        $this->level = $level;
+        $this->experience = $experience;
 
         return $this;
     }
