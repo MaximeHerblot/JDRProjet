@@ -19,7 +19,7 @@ Setup
 2) php bin/console doctrine:database:create
 3) php bin/console doctrine:migrations:migrate
 4) symfony serve
-5) curl https://localhost:8000/initiation
+5) php src/service/initiationApp.php
 
 *Here is for running the test 
 
