@@ -23,4 +23,4 @@ Setup
 
 *Here is for running the test 
 
-6) vendor/bin/phpunit tests
+6) ./vendor/bin/phpunit tests
