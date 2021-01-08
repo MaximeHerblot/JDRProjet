@@ -18,7 +18,7 @@ class InitiationController extends AbstractController
     public function index(UserPasswordEncoderInterface $passwordInterface): Response
     {
         //Initialisation de toutes les variables nécessaires dans la bse de données
-        $raceData = new RaceData($this->getDoctrine()->getManager());
+        $raceData = new RaceData();
 
 
         //Ajout de toutes les races qui sont nécessaires dans une liste
@@ -35,9 +35,8 @@ class InitiationController extends AbstractController
             $raceData->addRace($nom);
         }
 
-        $em = $this->getDoctrine()->getManager();
         //Ajout dans la base de données des différents races
-        $raceData->pushListRace($em);
+        $raceData->pushListRace();
         
         $user = new User();
         $user->setEmail("user@user.user");

@@ -2,11 +2,9 @@
 
 namespace App\DataBinder;
 
-use App\Entity\Race;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
+
+use App\Service\ConnectionBdClass;
 use PDO;
-use Symfony\Component\HttpFoundation\Response;
 
 class RaceData {
 
@@ -60,16 +58,20 @@ class RaceData {
         return $this->listRace;
     }
 
-    public function pushListRace(EntityManagerInterface $em): array{
+    public function pushListRace(): array{
+
+        $em = new ConnectionBdClass();
+        $conn = $em->getConnection();
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
 
         
+
         $listRace = $this->listRace;
         for ($i=0; $i <count($listRace) ; $i++) { 
-            $race = new Race();
-            $race->setName($listRace[$i]);
-            $em->persist($race);
+            $stmt= $conn->prepare("INSERT INTO race VALUES $listRace[$i]");
+            $stmt ->execute();
         }
-        $em->flush();
         return $listRace;
     }
 }

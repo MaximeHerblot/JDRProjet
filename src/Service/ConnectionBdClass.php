@@ -2,7 +2,6 @@
 
 namespace App\Service;
 use PDO;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class ConnectionBdClass{
 
