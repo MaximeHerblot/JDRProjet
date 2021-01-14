@@ -62,7 +62,14 @@
                 <a href="/gestion/characters">Gestion personnage</a>
             </div>
             <div class="grid-item"></div>
-            <div class="grid-item"></div>
+            <div class="grid-item">
+                {% if app.user %}
+
+                    <a href="/logout">{{ app.user.getUsername()}}</a>
+                {% else %}
+                    <a href="/login">Login pls</a>
+                {% endif %}
+            </div>
 
 
         </div>
