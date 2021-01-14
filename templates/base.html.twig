@@ -3,35 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://use.fontawesome.com/6236914045.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script>
         </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <style>
-            main {
-                margin-top:1rem;
-                margin-left:1rem;
-            }
-            
-            #navbar{
-                background-color:#e5e3e4;
-                padding:0.5rem;
-            }
 
-            ul{
-                text-align:center;
-            }
-        
-        {% block stylesheets %}
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href='/css/accueilStyle.css'  type="text/css">
+        <style>
             
-        {% endblock %}
+            body{
+                margin: 0;
+            }
         </style>
+        {% block head %}
+        {% endblock %}
     </head>
     <body>
-    <div id="navbar" class="row">
+
+    {# <div id="navbar" class="row">
         <nav class="navbar col-10 ">
             <ul class="col-3">
                 <a href="/" class="nav-link ">
@@ -61,14 +52,29 @@
             <a style="margin-bottom:0.25rem">{{app.user?app.user.getEmail() : 'Not logged'}} </a>
             
         </div>
+    </div> #}
+    <div class="navbar">
+        <div class="grid-container">
+            <div class="grid-item">
+                <a href="/">Acceuil</a>    
+            </div>
+            <div class="grid-item">
+                <a href="/gestion/characters">Gestion personnage</a>
+            </div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+
+
+        </div>
     </div>
         <main>
             {% block body %}
                 <p>There is no body block on your page<p>
             {% endblock %}
-            <script>
-            {% block javascripts %}{% endblock %}
-            </script>
+            
+            {% block javascripts %}
+            {% endblock %}
+            
         </main>
     </body>
 </html>

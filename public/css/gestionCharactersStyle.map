@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "gestionCharactersStyle.css",
+	"sources": [
+		"../sass/gestionCharactersStyle.scss"
+	],
+	"sourcesContent": [
+		"#ChoixPersonnage {\r\n    width:60%;\r\n    padding-top:1em;\r\n    padding-bottom:1em;\r\n    padding-left:1em;\r\n}\r\n#slotPersonnage{ \r\n    min-width:200px;\r\n    max-width:30%;\r\n    text-align:justify;\r\n    margin-top:5px;\r\n    margin-bottom:5px;\r\n}\r\n\r\n\r\n.grid-container {\r\n    display: grid;\r\n    grid-template-columns:  33% 33% 33%;\r\n}\r\n#nomPerso{\r\n    text-align: center;\r\n    \r\n    border-bottom:solid;\r\n    border-color:grey;\r\n    border-width:1px;\r\n\r\n}\r\n\r\n#buttonPersonnageShow{\r\n    text-align: center;\r\n    border-bottom:0px;\r\n}\r\n\r\n#show{\r\n    margin-right: 10px;\r\n    background-color:#3a3a3d;\r\n    color:#efeff1;\r\n    padding:2px;\r\n    border-radius: 5px;\r\n}\r\n\r\n#name{\r\n    font-family: fantasy;\r\n}"
+	],
+	"names": [],
+	"mappings": ";AAAA,AAAA,gBAAgB,CAAC;EACb,KAAK,EAAC,GAAG;EACT,WAAW,EAAC,GAAG;EACf,cAAc,EAAC,GAAG;EAClB,YAAY,EAAC,GAAG;CACnB;;;AACD,AAAA,eAAe,CAAA;EACX,SAAS,EAAC,KAAK;EACf,SAAS,EAAC,GAAG;EACb,UAAU,EAAC,OAAO;EAClB,UAAU,EAAC,GAAG;EACd,aAAa,EAAC,GAAG;CACpB;;;AAGD,AAAA,eAAe,CAAC;EACZ,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAG,WAAW;CACtC;;;AACD,AAAA,SAAS,CAAA;EACL,UAAU,EAAE,MAAM;EAElB,aAAa,EAAC,KAAK;EACnB,YAAY,EAAC,IAAI;EACjB,YAAY,EAAC,GAAG;CAEnB;;;AAED,AAAA,qBAAqB,CAAA;EACjB,UAAU,EAAE,MAAM;EAClB,aAAa,EAAC,GAAG;CACpB;;;AAED,AAAA,KAAK,CAAA;EACD,YAAY,EAAE,IAAI;EAClB,gBAAgB,EAAC,OAAO;EACxB,KAAK,EAAC,OAAO;EACb,OAAO,EAAC,GAAG;EACX,aAAa,EAAE,GAAG;CACrB;;;AAED,AAAA,KAAK,CAAA;EACD,WAAW,EAAE,OAAO;CACvB"
+}

@@ -1,0 +1,52 @@
+/* line 1, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#ChoixPersonnage {
+  width: 60%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+}
+
+/* line 7, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#slotPersonnage {
+  min-width: 200px;
+  max-width: 30%;
+  text-align: justify;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* line 16, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+.grid-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+/* line 20, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#nomPerso {
+  text-align: center;
+  border-bottom: solid;
+  border-color: grey;
+  border-width: 1px;
+}
+
+/* line 29, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#buttonPersonnageShow {
+  text-align: center;
+  border-bottom: 0px;
+}
+
+/* line 34, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#show {
+  margin-right: 10px;
+  background-color: #3a3a3d;
+  color: #efeff1;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+/* line 42, ../../Downloads/DND/public/sass/gestionCharactersStyle.scss */
+#name {
+  font-family: fantasy;
+}
+
+/*# sourceMappingURL=gestionCharactersStyle.css.map */
