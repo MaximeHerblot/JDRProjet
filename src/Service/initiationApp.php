@@ -22,7 +22,7 @@ array_push($listRace,"Nain");
 foreach ($listRace as $nom ) {
     $raceData->addRace($nom);
 }
-
+var_dump($raceData->getListRace());
 //Ajout dans la base de données des différents races
 $raceData->pushListRace();
 

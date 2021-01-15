@@ -18,8 +18,7 @@ class ConnectionBdClass{
         $dbType = $this->getDbType($infoDBNonFiltre);
         //Formatage de l'information
         $donnee= $this->formatageInformation($infoDBNonFiltre,$dbType);
-
-        
+             
         return new PDO($donnee["namedb"].":"."host=".$donnee["host"].$donnee["port"].";dbname=".$donnee["dbname"],$donnee["id"],$donnee["password"]);
         //Ouverture de la connection
         

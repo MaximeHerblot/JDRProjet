@@ -59,7 +59,7 @@ class CreationCharactersController extends AbstractController
         $Characters->setDescription($description);
         
         // $id = $this->getUser()->getId();
-        $conn = new PDO("mysql:host=localhost;dbname=dndinit","root","");
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit2","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id)
