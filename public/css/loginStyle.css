@@ -1,0 +1,29 @@
+/* line 1, ../../Downloads/DND/public/sass/loginStyle.scss */
+.div {
+  padding: 8% 35% 0;
+}
+
+/* line 4, ../../Downloads/DND/public/sass/loginStyle.scss */
+.div2 {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-style: solid;
+  border-color: #dadce0;
+  border-radius: 25px;
+}
+
+/* line 16, ../../Downloads/DND/public/sass/loginStyle.scss */
+.title {
+  text-align: center;
+}
+
+/* line 21, ../../Downloads/DND/public/sass/loginStyle.scss */
+.input input {
+  margin-bottom: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=loginStyle.css.map */

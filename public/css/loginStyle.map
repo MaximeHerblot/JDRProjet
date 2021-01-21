@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "loginStyle.css",
+	"sources": [
+		"../sass/loginStyle.scss"
+	],
+	"sourcesContent": [
+		".div {\r\n    padding: 8% 35% 0;\r\n}\r\n.div2 {\r\n    padding-left:5%;\r\n    padding-right:5%;\r\n    padding-top:2%;\r\n    padding-bottom:2%;\r\n   \r\n    border-style:solid;\r\n    border-color:#dadce0;\r\n    border-radius: 25px;\r\n    \r\n}\r\n\r\n.title {\r\n    text-align: center;\r\n}\r\n\r\n\r\n.input input {\r\n    margin-bottom: 10px;\r\n    height: 40px;\r\n    width: 100%;\r\n    \r\n}"
+	],
+	"names": [],
+	"mappings": ";AAAA,AAAA,IAAI,CAAC;EACD,OAAO,EAAE,QAAQ;CACpB;;;AACD,AAAA,KAAK,CAAC;EACF,YAAY,EAAC,EAAE;EACf,aAAa,EAAC,EAAE;EAChB,WAAW,EAAC,EAAE;EACd,cAAc,EAAC,EAAE;EAEjB,YAAY,EAAC,KAAK;EAClB,YAAY,EAAC,OAAO;EACpB,aAAa,EAAE,IAAI;CAEtB;;;AAED,AAAA,MAAM,CAAC;EACH,UAAU,EAAE,MAAM;CACrB;;;AAGD,AAAA,MAAM,CAAC,KAAK,CAAC;EACT,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;CAEd"
+}
