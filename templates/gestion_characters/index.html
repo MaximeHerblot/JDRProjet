@@ -28,11 +28,11 @@
 </div>
 {% endfor %}
 </div>
-{% else %}
+{% elseif characters|length ==0 %}
 <h1>Veuillez créer un personnage</h1>
-{% endif %}
+{% else %}
 <h3>Veux-tu créer un personnage</h3>
-<a class ="btn" href ="/creation/characters">Création de personnage</a>
 
-<h1></h1>
+{% endif %}
+<a class ="btn" href ="/creation/characters">Création de personnage</a>
 {% endblock %}

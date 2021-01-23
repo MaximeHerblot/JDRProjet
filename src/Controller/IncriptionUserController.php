@@ -44,7 +44,7 @@ class IncriptionUserController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        return new Response();
+        return new Response("Veuillez retourné en arriere");
         // $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
         // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

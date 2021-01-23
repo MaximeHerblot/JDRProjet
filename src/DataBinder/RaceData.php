@@ -35,12 +35,13 @@ class RaceData {
         $em = new ConnectionBdClass();
         $conn = $em->getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        
         $stmt =$conn->prepare("SELECT name FROM race");
         $stmt->execute();
+
         $stmt->setFetchMode(PDO::FETCH_COLUMN,0);
         $listFetch = $stmt->fetchAll();
-        // dd($listFetch);
+        var_dump($listFetch);
 
         foreach ($listFetch as $nomRace) {
             if ($nameRace==$nomRace) {
@@ -64,13 +65,14 @@ class RaceData {
         $conn = $em->getConnection();
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-
         
 
         $listRace = $this->listRace;
+        
         for ($i=0; $i <count($listRace) ; $i++) { 
             $stmt= $conn->prepare("INSERT INTO `race` (`name`) VALUES ('$listRace[$i]')");
             $stmt ->execute();
+            var_dump("arriver dans ce code");
         }
         return $listRace;
     }
