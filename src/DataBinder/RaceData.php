@@ -69,7 +69,7 @@ class RaceData {
 
         $listRace = $this->listRace;
         for ($i=0; $i <count($listRace) ; $i++) { 
-            $stmt= $conn->prepare("INSERT INTO race VALUES $listRace[$i]");
+            $stmt= $conn->prepare("INSERT INTO `race` (`name`) VALUES ('$listRace[$i]')");
             $stmt ->execute();
         }
         return $listRace;
