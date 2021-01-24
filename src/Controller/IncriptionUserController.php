@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\ConnectionBdClass;
 use InscriptionUsersControllerTest;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,45 @@ class IncriptionUserController extends AbstractController
         ]);
     }
 
+
+
+
+    public function verification_name_user_not_taken($email) {
+        $classConn = new ConnectionBdClass();
+        $conn = $classConn->getConnection();
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt= $conn->prepare("SELECT `email` FROM `user` WHERE email LIKE '$email' ");
+        $stmt ->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'User');
+
+        $fetch = $stmt->fetchAll();
+        if (count($fetch)) {
+            return True;
+        } else {
+            return False;
+        }
+    }
+
+    public function verif_info_donne($email,$password){
+
+        $passwordBonFormat = 0;
+        $emailBonFormat = 0;
+        if (is_string($password)) {
+            $passwordBonFormat = 1;
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailBonFormat = 1;
+        }
+        if ($emailBonFormat and $passwordBonFormat) {
+            return True;
+        } else {
+            return False;
+        }
+    }
+
     /**
      * @Route("/incription/user/requete", name="requete_incription")
      */
@@ -32,6 +72,8 @@ class IncriptionUserController extends AbstractController
         $emailEnvoye=($_POST["email"]);
         $passwordEnvoye=($_POST["password"]);
         
+        $this->verification_name_user_not_taken($emailEnvoye);
+        $this->verif_info_donne($emailEnvoye,$passwordEnvoye);
         $em = $this->getDoctrine()->getManager();
 
         $user = new User();
@@ -44,6 +86,10 @@ class IncriptionUserController extends AbstractController
         $em->persist($user);
         $em->flush();
 
+        //Retour d'une réponse pour dire que le compte est bien créer
+        return $this->render('incription_user/requete.html.twig',[
+            'emailUser'=> $emailEnvoye,
+        ]);
         return new Response("Veuillez retourné en arriere");
         // $conn = new PDO("mysql:host=localhost;dbname=dndprojet","root","");
         // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -52,5 +98,6 @@ class IncriptionUserController extends AbstractController
         // $stmt->execute();
         
     }
+    
     
 }

@@ -41,7 +41,6 @@ class RaceData {
 
         $stmt->setFetchMode(PDO::FETCH_COLUMN,0);
         $listFetch = $stmt->fetchAll();
-        var_dump($listFetch);
 
         foreach ($listFetch as $nomRace) {
             if ($nameRace==$nomRace) {
