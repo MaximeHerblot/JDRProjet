@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201231095106 extends AbstractMigration
+final class Version20210127211526 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,7 +20,8 @@ final class Version20201231095106 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE characters (id INT AUTO_INCREMENT NOT NULL, race_id INT DEFAULT NULL, user_id INT DEFAULT NULL, lastname VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, age INT NOT NULL, creation_date DATETIME DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, INDEX IDX_3A29410E6E59D40D (race_id), INDEX IDX_3A29410EA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE character_class (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE characters (id INT AUTO_INCREMENT NOT NULL, race_id INT DEFAULT NULL, user_id INT DEFAULT NULL, lastname VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, age INT NOT NULL, creation_date DATETIME DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, experience INT DEFAULT NULL, INDEX IDX_3A29410E6E59D40D (race_id), INDEX IDX_3A29410EA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE d (id INT AUTO_INCREMENT NOT NULL, d_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_98DD4ACCC00A36A (d_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE item (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE race (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -36,6 +37,7 @@ final class Version20201231095106 extends AbstractMigration
         $this->addSql('ALTER TABLE d DROP FOREIGN KEY FK_98DD4ACCC00A36A');
         $this->addSql('ALTER TABLE characters DROP FOREIGN KEY FK_3A29410E6E59D40D');
         $this->addSql('ALTER TABLE characters DROP FOREIGN KEY FK_3A29410EA76ED395');
+        $this->addSql('DROP TABLE character_class');
         $this->addSql('DROP TABLE characters');
         $this->addSql('DROP TABLE d');
         $this->addSql('DROP TABLE item');
