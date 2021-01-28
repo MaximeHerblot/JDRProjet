@@ -66,7 +66,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-// $stmt= $conn->prepare("INSERT INTO `user`(`email`, `roles`, `password`) VALUES ('user@user.user','','user')");
-// $stmt ->execute();
+$stmt= $conn->prepare("INSERT INTO `user`(`email`, `roles`, `password`) VALUES ('user@user.user','','user')");
+$stmt ->execute();
 
 
