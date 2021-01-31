@@ -57,6 +57,11 @@ class Characters
      */
     private $experience;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $listClass = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -159,6 +164,18 @@ class Characters
     public function setExperience(?int $experience): self
     {
         $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getListClass(): ?array
+    {
+        return $this->listClass;
+    }
+
+    public function setListClass(?array $listClass): self
+    {
+        $this->listClass = $listClass;
 
         return $this;
     }
