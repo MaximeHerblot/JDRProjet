@@ -40,7 +40,7 @@ array_push($listClass,"Guerrier");
 array_push($listClass,"Magicien");
 array_push($listClass,"Moine");
 array_push($listClass,"Paladin");
-array_push($listClass,"Rôdeur");
+array_push($listClass,"Rodeur");
 array_push($listClass,"Roublard");
 array_push($listClass,"Sorcier");
 

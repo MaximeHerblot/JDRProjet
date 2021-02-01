@@ -50,20 +50,16 @@ class CreationCharactersController extends AbstractController
         if (isset($_POST["raceId"])){
             $raceid = $_POST["raceId"];
         } 
+        $className = $_POST["className"];
         //Insert d'un personnage dans la base
-        
-        $Characters = new Characters();
-        $Characters->setLastname($lastname);
-        $Characters->setFirstname($firstname);
-        $Characters->setAge($age);
-        $Characters->setDescription($description);
+        // var_dump($className);
         
         // $id = $this->getUser()->getId();
         $conn = new PDO("mysql:host=localhost;dbname=dndinit2","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id)
-        VALUES ('$lastname','$firstname','$age','$description','$userId','$raceid')";
+        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id,list_class)
+        VALUES ('$lastname','$firstname','$age','$description','$userId','$raceid','$className' )";
         $conn->exec($sql);
         return new Response ("",200,array("lastname"=>$lastname,"firstname"=>$firstname,"age"=>$age,"description"=>$description,"userId"=>$userId));
     }

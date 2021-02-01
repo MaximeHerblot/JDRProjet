@@ -8,6 +8,16 @@ use function PHPUnit\Framework\assertEquals;
 
 class CreationCharactersControllerTest extends TestCase{
 
+    public function conn(){
+        $classConn = new ConnectionBdClass();
+        $conn = $classConn->getConnection();
+
+
+
+        // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    }
     public function creation_value_random(){
         $faker = Faker\Factory::create();
         $FirstNameLastName=$faker->name();
@@ -20,13 +30,7 @@ class CreationCharactersControllerTest extends TestCase{
     }
 
     public function recup_user(){
-        $classConn = new ConnectionBdClass();
-        $conn = $classConn->getConnection();
-
-
-
-        // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn = $this->conn();
         //Récupération de l'id d'un des user
         $stmt= $conn->prepare("SELECT id FROM user");
         $stmt ->execute();
@@ -43,29 +47,39 @@ class CreationCharactersControllerTest extends TestCase{
     }
 
 
-public function recup_race(){
-    $classConn = new ConnectionBdClass();
-    $conn = $classConn->getConnection();
-
-
-
-    // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //Récupération de l'id d'une des races
-    $stmt= $conn->prepare("SELECT id FROM race");
-    $stmt ->execute();
-    $stmt->setFetchMode(PDO::FETCH_CLASS,'Race');
-
-    $fetch = $stmt->fetchAll();
+    public function recup_race(){
         
-    if (!$fetch) {
-        $raceId =NULL;
-    } else {
-        $raceId = $_POST["raceId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
-    }
-    return $raceId;
+        //Récupération de l'id d'une des races
+        $conn = $this->conn();
+        $stmt= $conn->prepare("SELECT id FROM race");
+        $stmt ->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Race');
+
+        $fetch = $stmt->fetchAll();
+            
+        if (!$fetch) {
+            $raceId =NULL;
+        } else {
+            $raceId = $_POST["raceId"]=($fetch[rand(0,count($fetch)-1)]["id"]);
+        }
+        return $raceId;
     
-}
+    }
+
+    public function recup_class(){
+        $conn = $this->conn();
+        $stmt = $conn->prepare("SELECT name FROM character_class");
+        $stmt ->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'CharacterClass');
+        $fetch = $stmt->fetchAll();
+        if (!$fetch) {
+            $className =NULL;
+        } else {
+            $className = $_POST["className"] = json_encode(array(($fetch[rand(0,count($fetch)-1)]["name"])=>1));
+        }
+        
+        return $className;
+    }
 
     /**
      * @test
@@ -90,7 +104,8 @@ public function recup_race(){
 
         $userId = $this->recup_user();
         $raceId = $this->recup_race();
-
+        $className = $this->recup_class();
+        // var_dump($className);
         $classConn = new ConnectionBdClass();
         $conn = $classConn->getConnection();
 
@@ -104,14 +119,18 @@ public function recup_race(){
 
         $stmt->setFetchMode(PDO::FETCH_CLASS,"Characters",[]);
         $fetch = $stmt->fetchAll()[0];
-        var_dump($fetch);
+        // var_dump($fetch);
         assertEquals($lastname,$fetch["lastname"]);
         assertEquals($firstname,$fetch["firstname"]);
         assertEquals($age,$fetch["age"]);
         assertEquals($description,$fetch["description"]);
         //Vérification que l'utilisateur a bien le personnage
         assertEquals($userId,$fetch["user_id"]);
+        //Vérification que le personnage a bien la bonne race
         assertEquals($raceId,$fetch["race_id"]);
+
+        //Vérification que le personne a bien la bonne classe
+        assertEquals($className,$fetch["list_class"]);
 
         // // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
         // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
