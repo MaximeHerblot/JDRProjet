@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CharactersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,16 @@ class Characters
      * @ORM\Column(type="json", nullable=true)
      */
     private $listClass = [];
+
+    /**
+     * @ORM\ManyToMany(targetEntity=CharacterClass::class, inversedBy="characters")
+     */
+    private $CharacterClass;
+
+    public function __construct()
+    {
+        $this->CharacterClass = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -176,6 +188,30 @@ class Characters
     public function setListClass(?array $listClass): self
     {
         $this->listClass = $listClass;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CharacterClass[]
+     */
+    public function getCharacterClass(): Collection
+    {
+        return $this->CharacterClass;
+    }
+
+    public function addCharacterClass(CharacterClass $characterClass): self
+    {
+        if (!$this->CharacterClass->contains($characterClass)) {
+            $this->CharacterClass[] = $characterClass;
+        }
+
+        return $this;
+    }
+
+    public function removeCharacterClass(CharacterClass $characterClass): self
+    {
+        $this->CharacterClass->removeElement($characterClass);
 
         return $this;
     }
