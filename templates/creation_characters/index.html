@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello CreationCharactersController!{% endblock %}
-{% block stylesheets %}
-#race{
-    margin-bottom:10px;
-}
+{% block head %}
+<link rel="stylesheet" href='/css/creationCharactersStyle.css'  type="text/css">
+
+
 {% endblock %}
 {% block javascripts %}
 <script src="/js/creationCharacters.js"></script>
-
 <!-- {firstname:firstname,lastname:lastname,age:age,Description:Description,userId:userId,raceId:raceId} -->
 {% endblock %}
 {% block body %}

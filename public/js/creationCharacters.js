@@ -1,3 +1,4 @@
+
 function recoverData(){
     
     data = document.querySelector("#form").children
@@ -32,4 +33,6 @@ $("button")[0].onclick = function() {
         console.log(e.lastname)
     })
 }
+
+document.querySelector("h1").className = "active"
 
