@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CharacterClass;
 use App\Entity\Characters;
 use App\Entity\Race;
 use PDO;
@@ -24,13 +25,14 @@ class CreationCharactersController extends AbstractController
         //Récupération des personnages de l'utilisateur
         
         $RepoRace = $em->getRepository(Race::class)->findAll();
-
-        // dd($RepoRace);
+        $RepoClass = $em->getRepository(CharacterClass::class)->findAll();
+        
 
     
         return $this->render('creation_characters/index.html', [
             'controller_name' => 'CreationCharactersController',
             'RepoRace' => $RepoRace,
+            'RepoClass' => $RepoClass,
         ]);
     }
 

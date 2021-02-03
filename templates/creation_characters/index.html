@@ -34,6 +34,11 @@
         <!---->
     {% endfor %}
     </select>
+    <select name="classData" id="classId">
+    {% for Class in RepoClass %}
+        <option value={{Class.id}}>{{Class.name}}</option>
+    {% endfor %}
+    </select>
     </br>
     <input id="userId" name="userIdData" type="hidden" value="{{app.user.id}}">
     <button id="formSubmit" class="btn">Création du personnage</button>
