@@ -59,10 +59,7 @@ class Characters
      */
     private $experience;
 
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
-    private $listClass = [];
+    
 
     /**
      * @ORM\ManyToMany(targetEntity=CharacterClass::class, inversedBy="characters")
@@ -180,17 +177,6 @@ class Characters
         return $this;
     }
 
-    public function getListClass(): ?array
-    {
-        return $this->listClass;
-    }
-
-    public function setListClass(?array $listClass): self
-    {
-        $this->listClass = $listClass;
-
-        return $this;
-    }
 
     /**
      * @return Collection|CharacterClass[]

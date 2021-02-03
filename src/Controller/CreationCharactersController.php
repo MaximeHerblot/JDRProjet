@@ -50,7 +50,7 @@ class CreationCharactersController extends AbstractController
         if (isset($_POST["raceId"])){
             $raceid = $_POST["raceId"];
         } 
-        $className = $_POST["className"];
+        $classId = $_POST["classId"];
         //Insert d'un personnage dans la base
         // var_dump($className);
         
@@ -58,9 +58,31 @@ class CreationCharactersController extends AbstractController
         $conn = new PDO("mysql:host=localhost;dbname=dndinit2","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id,list_class)
-        VALUES ('$lastname','$firstname','$age','$description','$userId','$raceid','$className' )";
+        $sql = "INSERT INTO characters (lastname, firstname, age, description,user_id,race_id)
+        VALUES ('$lastname','$firstname','$age','$description','$userId','$raceid' )";
+        var_dump($sql);
         $conn->exec($sql);
-        return new Response ("",200,array("lastname"=>$lastname,"firstname"=>$firstname,"age"=>$age,"description"=>$description,"userId"=>$userId));
+        
+        $conn = new PDO("mysql:host=localhost;dbname=dndinit2","root","");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT id FROM characters WHERE lastname LIKE '".$lastname."' AND firstname LIKE '".$firstname."'" ;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_COLUMN ,0);
+        $fetch = $stmt->fetchAll();
+        $charactersId = ($fetch[count($fetch)-1]);
+        
+
+        //Ajout de la classe dans le personnage
+
+        $sql = "INSERT INTO characters_character_class (characters_id ,character_class_id , level) VALUES ($charactersId, $classId , 1)";
+        
+        // var_dump($sql);
+        
+        $conn->exec($sql);
+        
+        $rep = array("lastname"=>$lastname,"firstname"=>$firstname,"age"=>$age,"description"=>$description,"userId"=>$userId,"charactersId"=>$charactersId);
+        
+        return new Response ("",200,$rep);
     }
 }

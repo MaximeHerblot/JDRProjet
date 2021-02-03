@@ -66,19 +66,20 @@ class CreationCharactersControllerTest extends TestCase{
     
     }
 
-    public function recup_class(){
+    public function recup_class_random(){
         $conn = $this->conn();
-        $stmt = $conn->prepare("SELECT name FROM character_class");
+        $stmt = $conn->prepare("SELECT id FROM character_class");
         $stmt ->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS,'CharacterClass');
         $fetch = $stmt->fetchAll();
+
         if (!$fetch) {
-            $className =NULL;
+            $classId =NULL;
         } else {
-            $className = $_POST["className"] = json_encode(array(($fetch[rand(0,count($fetch)-1)]["name"])=>1));
+            $classId = $_POST["classId"] = $fetch[rand(0,count($fetch)-1)]["id"];
         }
         
-        return $className;
+        return $classId;
     }
 
     /**
@@ -104,8 +105,8 @@ class CreationCharactersControllerTest extends TestCase{
 
         $userId = $this->recup_user();
         $raceId = $this->recup_race();
-        $className = $this->recup_class();
-        // var_dump($className);
+        $classId = $this->recup_class_random();
+        // var_dump($classId);
         $classConn = new ConnectionBdClass();
         $conn = $classConn->getConnection();
 
@@ -130,7 +131,21 @@ class CreationCharactersControllerTest extends TestCase{
         assertEquals($raceId,$fetch["race_id"]);
 
         //Vérification que le personne a bien la bonne classe
-        assertEquals($className,$fetch["list_class"]);
+        //Récupération de l'id personnage
+        // var_dump($fetch);
+
+        $sql = "SELECT id FROM characters WHERE lastname LIKE '".$lastname."' AND firstname LIKE '".$firstname."'" ;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_COLUMN ,0);
+        $fetch = $stmt->fetchAll();
+        $charactersId = ($fetch[count($fetch)-1]);
+
+        // $sql = "SELECT * FROM characters_character_class WHERE characters_id LIKE  '".$infoCreation["charactersId"]."' AND character_class_id LIKE '".$classId."'";
+        // $stmt = $conn->prepare($sql);
+        // $stmt->execute();
+        // $fetch = $stmt->fetchAll();
+        // var_dump($fetch);
 
         // // $conn = new PDO("mysql:host=localhost:3306;dbname=dndinit","root","");
         // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
