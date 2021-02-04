@@ -66,6 +66,11 @@ class Characters
      */
     private $CharacterClass;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="characters")
+     */
+    private $groupe;
+
     public function __construct()
     {
         $this->CharacterClass = new ArrayCollection();
@@ -198,6 +203,18 @@ class Characters
     public function removeCharacterClass(CharacterClass $characterClass): self
     {
         $this->CharacterClass->removeElement($characterClass);
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Group
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Group $groupe): self
+    {
+        $this->groupe = $groupe;
 
         return $this;
     }
