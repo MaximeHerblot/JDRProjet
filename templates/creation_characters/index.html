@@ -22,23 +22,29 @@
     <label for="age">Qu'elle age a ton personnage?</label>
     <input required type="number" name="ageData" id="age" placeholder="Âge" min="0" max="1000">
     <br>
-    <h6>Entré une description de votre personnage</h6>
+    <h3>Entré une description de votre personnage</h6>
     <textarea required name="DescriptionData" id="Description" cols="100" rows="10"></textarea>
     <br>
-    <select name="raceData" id="raceId">
-    {% for Race in RepoRace %}
-        <option value={{Race.id}}>{{Race.Name}}</option>
-        <!-- Création de la liste déroulante -->
-        
-        <!---->
-    {% endfor %}
-    </select>
-    <select name="classData" id="classId">
-    {% for Class in RepoClass %}
-        <option value={{Class.id}}>{{Class.name}}</option>
-    {% endfor %}
-    </select>
-    </br>
+    <div class="data">
+        <span>Sélectionnez la race de votre personnage</span>
+        <select name="raceData" id="raceId">
+        {% for Race in RepoRace %}
+            <option value={{Race.id}}>{{Race.Name}}</option>
+            <!-- Création de la liste déroulante -->
+            
+            <!---->
+        {% endfor %}
+        </select>
+    </div>
+    <div class="data">
+        <span>Sélectionnez votre classe de base</span>
+        <select name="classData" id="classId">
+        {% for Class in RepoClass %}
+            <option value={{Class.id}}>{{Class.name}}</option>
+        {% endfor %}
+        </select>
+    </div>
+    
     <input id="userId" name="userIdData" type="hidden" value="{{app.user.id}}">
     <button id="formSubmit" class="btn">Création du personnage</button>
 </div>

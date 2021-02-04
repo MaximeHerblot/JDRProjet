@@ -13,10 +13,20 @@ $raceData = new RaceData();
 //Ajout de toutes les races qui sont nécessaires dans une liste
 $listRace = [];
 
-array_push($listRace,"Humain");
-array_push($listRace,"Elfe");
-array_push($listRace,"Nain");
 
+array_push($listRace,"Elfe");
+array_push($listRace,"Halfelin");
+array_push($listRace,"Humain");
+array_push($listRace,"Nain");
+array_push($listRace,"Demi-Elfe");
+array_push($listRace,"Demi-Orque");
+array_push($listRace,"Drakéide");
+array_push($listRace,"Gnome");
+array_push($listRace,"Tieffelin");
+array_push($listRace,"Génasi");
+array_push($listRace,"Aarokocra");
+array_push($listRace,"Gnome des profondeurs");
+array_push($listRace,"Goliath");
 
 //ListRace remplit
 

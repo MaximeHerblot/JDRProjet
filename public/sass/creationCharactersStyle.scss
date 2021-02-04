@@ -13,3 +13,16 @@ h1 {
     }
 }
 
+select {
+    width: 10%;
+    text-align: center;
+}
+.data{
+    select{
+        margin: 10px;
+
+    }
+}
+input[type="text"]{
+    height:20px;
+}
