@@ -85,7 +85,7 @@ class IncriptionUserController extends AbstractController
         $user->setRoles(["ROLE_USER"]);
         $em->persist($user);
         $em->flush();
-
+        
         //Retour d'une réponse pour dire que le compte est bien créer
         return $this->render('incription_user/requete.html.twig',[
             'emailUser'=> $emailEnvoye,

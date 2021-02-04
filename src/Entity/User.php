@@ -41,9 +41,15 @@ class User implements UserInterface
      */
     private $characters;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Group::class, mappedBy="user")
+     */
+    private $GroupOwner;
+
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->GroupOwner = new ArrayCollection();
     }
 
     
@@ -153,6 +159,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($character->getUser() === $this) {
                 $character->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroupOwner(): Collection
+    {
+        return $this->GroupOwner;
+    }
+
+    public function addGroupOwner(Group $groupOwner): self
+    {
+        if (!$this->GroupOwner->contains($groupOwner)) {
+            $this->GroupOwner[] = $groupOwner;
+            $groupOwner->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupOwner(Group $groupOwner): self
+    {
+        if ($this->GroupOwner->removeElement($groupOwner)) {
+            // set the owning side to null (unless already changed)
+            if ($groupOwner->getUser() === $this) {
+                $groupOwner->setUser(null);
             }
         }
 

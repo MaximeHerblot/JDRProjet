@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GestionGroupeController!{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="/css/gestionGroupStyle.css">
+
+{% endblock %}
+{% block body %}
+
+{% if listGroup|length %}
+    Voici les groupes dont tu es maitre
+    {% for group in listGroup  %}
+        <a href={{"gestion/group/"~group.getId()}}>Show</a>
+    {% endfor %}
+{% endif %}
+<div>
+    <h2>Commence par créer un groupe</h2>
+</div>
+
+<div class="creationGroup">
+    <a href="/creation/group">Création de groupe</a>
+</div>
+{% endblock %}
