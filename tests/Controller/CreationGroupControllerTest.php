@@ -4,6 +4,9 @@ use App\Controller\CreationGroupController;
 use App\Service\ConnectionBdClass;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertGreaterThan;
+
 class CreationGroupControllerTest extends TestCase{
 
     public function conn(){
@@ -50,7 +53,7 @@ class CreationGroupControllerTest extends TestCase{
      */
     public function group_bien_creer(){
         $faker = Faker\Factory::create();
-        $nameGroup = $faker->name();
+        $nameGroup = $_POST["nameGroup"] = $faker->name();
         
         $userId = $_POST["userId"] = $this->recup_random_user_id();
         // var_dump($userId);
@@ -59,11 +62,23 @@ class CreationGroupControllerTest extends TestCase{
         $controller = new CreationGroupController();
         $controller -> creationGroup();
 
-        //Vérification que le groupe a bien été créer
+        //Vérication que le groupe a bien été créer 
         $conn = $this->conn();
-
-        $sql = "SELECT groupe_id FROM characters"
-
+        $sql = "SELECT id FROM `group` WHERE name_group LIKE '".$nameGroup."' AND user_id LIKE ".$userId."";        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $fetch = $stmt->fetchAll();
+        
+        $group_id =  ($fetch[count($fetch)-1]["id"]);
+        assertGreaterThan(0,count($fetch));
+        //Vérification que les personnage sont bien dans le groupe
+        foreach ($listIdCharacters as $idCharacter) {
+            $sql = "SELECT groupe_id FROM `characters` WHERE id LIKE ".$idCharacter;
+            $stmt= $conn->prepare($sql);
+            $stmt->execute();
+            $fetch = $stmt->fetchAll();
+            assertEquals($group_id,$fetch[0]["groupe_id"]);
+        }
     }
 
 

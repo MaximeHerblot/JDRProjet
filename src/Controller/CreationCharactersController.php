@@ -66,7 +66,7 @@ class CreationCharactersController extends AbstractController
         
         $conn = new PDO("mysql:host=localhost;dbname=dndinit2","root","");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT id FROM characters WHERE lastname LIKE '".$lastname."' AND firstname LIKE '".$firstname."'" ;
+        $sql = "SELECT id FROM `characters` WHERE lastname LIKE '".$lastname."' AND firstname LIKE '".$firstname."'" ;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_COLUMN ,0);
