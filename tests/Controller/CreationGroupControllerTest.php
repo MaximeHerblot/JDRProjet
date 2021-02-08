@@ -72,13 +72,17 @@ class CreationGroupControllerTest extends TestCase{
         $group_id =  ($fetch[count($fetch)-1]["id"]);
         assertGreaterThan(0,count($fetch));
         //Vérification que les personnage sont bien dans le groupe
+        $value = 1;
         foreach ($listIdCharacters as $idCharacter) {
             $sql = "SELECT groupe_id FROM `characters` WHERE id LIKE ".$idCharacter;
             $stmt= $conn->prepare($sql);
             $stmt->execute();
             $fetch = $stmt->fetchAll();
-            assertEquals($group_id,$fetch[0]["groupe_id"]);
+            if ($group_id == $fetch[0]["groupe_id"]) {
+                $value=0;
+            }
         }
+        assertEquals(0,$value);
     }
 
 
