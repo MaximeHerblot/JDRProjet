@@ -48,6 +48,10 @@ class CreationGroupControllerTest extends TestCase{
         $idCharacter2 = array_splice($fetch,$ind,1);
         return [$idCharacter[0]["id"],$idCharacter2[0]["id"]];
     }
+
+    public function recup_random_group_link(){
+        return string;
+    }
     /**
      * @test
      */
@@ -72,17 +76,29 @@ class CreationGroupControllerTest extends TestCase{
         $group_id =  ($fetch[count($fetch)-1]["id"]);
         assertGreaterThan(0,count($fetch));
         //Vérification que les personnage sont bien dans le groupe
-        $value = 1;
-        foreach ($listIdCharacters as $idCharacter) {
-            $sql = "SELECT groupe_id FROM `characters` WHERE id LIKE ".$idCharacter;
-            $stmt= $conn->prepare($sql);
-            $stmt->execute();
-            $fetch = $stmt->fetchAll();
-            if ($group_id == $fetch[0]["groupe_id"]) {
-                $value=0;
-            }
-        }
-        assertEquals(0,$value);
+        // $value = 1;
+        // foreach ($listIdCharacters as $idCharacter) {
+        //     $sql = "SELECT groupe_id FROM `characters` WHERE id LIKE ".$idCharacter;
+        //     $stmt= $conn->prepare($sql);
+        //     $stmt->execute();
+        //     $fetch = $stmt->fetchAll();
+        //     if ($group_id == $fetch[0]["groupe_id"]) {
+        //         $value=0;
+        //     }
+        // }
+        // assertEquals(0,$value);
+    }
+    /**
+     * @test
+     */
+    public function ajout_de_personnage_dans_le_groupe(){
+        $this->recup_random_characters();
+        $link= $this->recup_random_group_link();
+        $controller = new CreationGroupController();
+        $controller->ajout_personnage_dans_le_groupe($link);
+
+        //Vérification que le personnage est bien ajouté dans le bon group
+        
     }
 
 
