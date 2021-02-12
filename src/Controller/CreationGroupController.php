@@ -40,7 +40,9 @@ class CreationGroupController extends AbstractController
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "INSERT INTO `group` (`name_group`, `user_id`) 
-        VALUES ('$nameGroup',".$userId.")";
+        VALUES (':nameGroup',".$userId.")";
+        $sth = $conn->prepare($sql);
+        $sth->bindParam(':nameGroup',$nameGroup);
         $conn->exec($sql);
         
         //Récupération de l'id du groupe qui vient d'être créer
@@ -65,7 +67,9 @@ class CreationGroupController extends AbstractController
     public function ajout_personnage_dans_le_groupe(string $link){
         $repoGroup = $this->getDoctrine()->getManager()->getRepository(Group::class);
         
-        $sql = "SELECT link FROM group WHERE link LIKE '".$link."'";
+        $sql = "SELECT id FROM group WHERE link LIKE '".$link."'";
         
+
+
     }
 }
