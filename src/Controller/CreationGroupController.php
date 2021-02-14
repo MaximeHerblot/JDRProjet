@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Group;
 use App\Service\ConnectionBdClass;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,11 +11,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CreationGroupController extends AbstractController
 {
+    public function recup_personnage_choissable(){
+        //Les personnages choissable sont ceux que l'utilisateur a le joueur en tant qu'amis 
+
+
+    }
+
     /**
      * @Route("/creation/group", name="creation_group")
      */
     public function index(): Response
     {
+
         return $this->render('creation_group/index.html.twig', [
             'controller_name' => 'CreationGroupController',
         ]);
@@ -33,6 +41,7 @@ class CreationGroupController extends AbstractController
 
         $sql = "INSERT INTO `group` (`name_group`, `user_id`) 
         VALUES ('$nameGroup',".$userId.")";
+        // $sth = $conn->prepare($sql);
         $conn->exec($sql);
         
         //Récupération de l'id du groupe qui vient d'être créer
@@ -42,13 +51,24 @@ class CreationGroupController extends AbstractController
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_COLUMN ,0);
         $fetch = $stmt->fetchAll();
-        $group_id =  ($fetch[count($fetch)-1]);
+        // var_dump($fetch);
         //Parcours de la liste des characters
 
-        foreach ($_POST["listIdCharacters"] as $charactersId) {
-            $sql = "UPDATE `characters` SET `groupe_id` = ".$group_id." WHERE id = ".$charactersId;
-            $conn->exec($sql);
-        }
+        // foreach ($_POST["listIdCharacters"] as $charactersId) {
+        //     $sql = "UPDATE `characters` SET `groupe_id` = ".$group_id." WHERE id = ".$charactersId;
+        //     $conn->exec($sql);
+        // }
         
+    }
+    /**
+     * @Route ("/creation/groupe/ajout/personnage/{link}")
+     */
+    public function ajout_personnage_dans_le_groupe(string $link){
+        $repoGroup = $this->getDoctrine()->getManager()->getRepository(Group::class);
+        
+        $sql = "SELECT id FROM group WHERE link LIKE '".$link."'";
+        
+
+
     }
 }
