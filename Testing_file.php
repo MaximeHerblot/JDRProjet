@@ -1,17 +1,15 @@
-<?php 
+<?php
+
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 
 
 class test {
-    public function b(){
-        $value = 1;
+    protected $manager;
+    public function __construct(EntityManager $manager)
+    {
+        $this->manager = $manager;
     }
-    public function a (){
-        $this->b();
-        echo($value);
-    }
-    
 }
 
-
-$class = new test();
-$class->a();
+new test();

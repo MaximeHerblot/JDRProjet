@@ -73,7 +73,6 @@ class CreationGroupControllerTest extends TestCase{
         $stmt->execute();
         $fetch = $stmt->fetchAll();
         
-        $group_id =  ($fetch[count($fetch)-1]["id"]);
         assertGreaterThan(0,count($fetch));
         //Vérification que les personnage sont bien dans le groupe
         // $value = 1;
@@ -88,9 +87,7 @@ class CreationGroupControllerTest extends TestCase{
         // }
         // assertEquals(0,$value);
     }
-    /**
-     * @test
-     */
+    
     public function ajout_de_personnage_dans_le_groupe(){
         $this->recup_random_characters();
         $link= $this->recup_random_group_link();

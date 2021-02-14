@@ -40,9 +40,8 @@ class CreationGroupController extends AbstractController
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "INSERT INTO `group` (`name_group`, `user_id`) 
-        VALUES (':nameGroup',".$userId.")";
-        $sth = $conn->prepare($sql);
-        $sth->bindParam(':nameGroup',$nameGroup);
+        VALUES ('$nameGroup',".$userId.")";
+        // $sth = $conn->prepare($sql);
         $conn->exec($sql);
         
         //Récupération de l'id du groupe qui vient d'être créer
@@ -52,7 +51,7 @@ class CreationGroupController extends AbstractController
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_COLUMN ,0);
         $fetch = $stmt->fetchAll();
-        $group_id =  ($fetch[count($fetch)-1]);
+        // var_dump($fetch);
         //Parcours de la liste des characters
 
         // foreach ($_POST["listIdCharacters"] as $charactersId) {
