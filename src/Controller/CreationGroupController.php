@@ -34,13 +34,14 @@ class CreationGroupController extends AbstractController
     public function creationGroup(){
         $userId = $_POST["userId"];
         $nameGroup = $_POST["nameGroup"];
+        $link = $_POST["link"];
         $classConn= new ConnectionBdClass();
         $conn = $classConn->getConnection();
         //Execution de la requete sql
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO `group` (`name_group`, `user_id`) 
-        VALUES ('$nameGroup',".$userId.")";
+        $sql = "INSERT INTO `group` (`name_group`, `user_id`, `link`) 
+        VALUES ('$nameGroup',".$userId.",'$link')";
         // $sth = $conn->prepare($sql);
         $conn->exec($sql);
         
@@ -64,9 +65,16 @@ class CreationGroupController extends AbstractController
      * @Route ("/creation/groupe/ajout/personnage/{link}")
      */
     public function ajout_personnage_dans_le_groupe(string $link){
-        $repoGroup = $this->getDoctrine()->getManager()->getRepository(Group::class);
         
-        $sql = "SELECT id FROM group WHERE link LIKE '".$link."'";
+        $sql = "SELECT id FROM `group` WHERE link LIKE '".$link."'";
+        $connClass = new ConnectionBdClass();
+        $conn = $connClass->getConnection();
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_COLUMN,0);
+        $fetch = $stmt->fetchAll();
         
 
 
